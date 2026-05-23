@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot name="line_follower" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- Define the robot's links and joints here -->
+
+  <xacro:include filename="properties.xacro" />
+  <xacro:include filename="base.xacro" />
+  <xacro:include filename="camera_sensor.xacro" />
+  <xacro:include filename="base_gazebo.xacro" />
+
+  
+</robot>

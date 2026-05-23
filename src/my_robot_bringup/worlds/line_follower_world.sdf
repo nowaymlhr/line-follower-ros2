@@ -1,0 +1,131 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="line_follower_world">
+
+    <!-- World-level plugins -->
+    <plugin name="gz::sim::systems::Physics" filename="gz-sim-physics-system"/>
+    <plugin name="gz::sim::systems::UserCommands" filename="gz-sim-user-commands-system"/>
+    <plugin name="gz::sim::systems::SceneBroadcaster" filename="gz-sim-scene-broadcaster-system"/>
+    <plugin name="gz::sim::systems::Sensors" filename="gz-sim-sensors-system">
+        <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <!-- Lighting -->
+    <light type="directional" name="sun">
+        <cast_shadows>true</cast_shadows>
+        <pose>0 0 10 0 0 0</pose>
+        <diffuse>1 1 1 1</diffuse>
+        <specular>0.5 0.5 0.5 1</specular>
+    </light>
+
+    <!-- Ground plane -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="ground">
+        <collision name="ground_collision">
+          <geometry>
+            <plane><normal>0 0 1</normal><size>50 50</size></plane>
+          </geometry>
+        </collision>
+        <visual name="ground_visual">
+          <geometry>
+            <plane><normal>0 0 1</normal><size>50 50</size></plane>
+          </geometry>
+          <material>
+            <ambient>0.9 0.9 0.9 1</ambient>
+            <diffuse>0.9 0.9 0.9 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Track -->
+    <model name="black_line_track">
+      <static>true</static>
+      <link name="track_link">
+
+        <visual name="base_horizontal">
+          <pose>5 0 0.01 0 0 0</pose>
+          <geometry><box><size>10.2 0.2 0.02</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+        </visual>
+        <collision name="base_horizontal_collision">
+          <pose>5 0 0.01 0 0 0</pose>
+          <geometry><box><size>10.2 0.2 0.02</size></box></geometry>
+        </collision>
+
+        <visual name="right_vertical">
+          <pose>10 5 0.01 0 0 1.5708</pose>
+          <geometry><box><size>10 0.2 0.02</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+        </visual>
+        <collision name="right_vertical_collision">
+          <pose>10 5 0.01 0 0 1.5708</pose>
+          <geometry><box><size>10 0.2 0.02</size></box></geometry>
+        </collision>
+
+        <visual name="top_horizontal">
+          <pose>7 10 0.01 0 0 0</pose>
+          <geometry><box><size>6.2 0.2 0.02</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+        </visual>
+        <collision name="top_horizontal_collision">
+          <pose>7 10 0.01 0 0 0</pose>
+          <geometry><box><size>6.2 0.2 0.02</size></box></geometry>
+        </collision>
+
+        <visual name="inner_vertical1">
+          <pose>4 8.5 0.01 0 0 1.5708</pose>
+          <geometry><box><size>3 0.2 0.02</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+        </visual>
+        <collision name="inner_vertical1_collision">
+          <pose>4 8.5 0.01 0 0 1.5708</pose>
+          <geometry><box><size>3 0.2 0.02</size></box></geometry>
+        </collision>
+
+        <visual name="inner_horizontal">
+          <pose>5.5 7 0.01 0 0 0</pose>
+          <geometry><box><size>3.2 0.2 0.02</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+        </visual>
+        <collision name="inner_horizontal_collision">
+          <pose>5.5 7 0.01 0 0 0</pose>
+          <geometry><box><size>3.2 0.2 0.02</size></box></geometry>
+        </collision>
+
+        <visual name="inner_vertical2">
+          <pose>7 5.5 0.01 0 0 1.5708</pose>
+          <geometry><box><size>3 0.2 0.02</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+        </visual>
+        <collision name="inner_vertical2_collision">
+          <pose>7 5.5 0.01 0 0 1.5708</pose>
+          <geometry><box><size>3 0.2 0.02</size></box></geometry>
+        </collision>
+
+        <visual name="lower_horizontal">
+          <pose>3.5 4 0.01 0 0 0</pose>
+          <geometry><box><size>7.2 0.2 0.02</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+        </visual>
+        <collision name="lower_horizontal_collision">
+          <pose>3.5 4 0.01 0 0 0</pose>
+          <geometry><box><size>7.2 0.2 0.02</size></box></geometry>
+        </collision>
+
+        <visual name="final_vertical">
+          <pose>0 2 0.01 0 0 1.5708</pose>
+          <geometry><box><size>4 0.2 0.02</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+        </visual>
+        <collision name="final_vertical_collision">
+          <pose>0 2 0.01 0 0 1.5708</pose>
+          <geometry><box><size>4 0.2 0.02</size></box></geometry>
+        </collision>
+
+      </link>
+    </model>
+
+  </world>
+</sdf>

@@ -1,0 +1,48 @@
+<launch>
+
+    <let name="urdf_path"
+            value="$(find-pkg-share line_follower_bot)/urdf/line_follower.urdf.xacro" />
+
+    <let name="bridge_config"
+            value="$(find-pkg-share my_robot_bringup)/config/line_follower_bridge.yaml" /> 
+
+    <let name="rviz_config"
+            value="$(find-pkg-share my_robot_description)/config/line_camera.rviz" />
+
+    <!-- Initializing the robot -->
+
+    <node pkg="robot_state_publisher" exec="robot_state_publisher">
+        <param name="robot_description" value="$(command 'xacro $(var urdf_path)')" />
+    </node>
+
+    <!-- Initializing the robot -->
+
+    <!-- Spawning robot in gazebo -->
+    
+
+
+
+    <include file="$(find-pkg-share ros_gz_sim)/launch/gz_sim.launch.py">
+        <arg name="gz_args" value="$(find-pkg-share my_robot_bringup)/worlds/line_follower_world.sdf -r" />
+    </include>
+
+    <node pkg="ros_gz_sim" exec="create" args="-topic robot_description -x 5.0 -y 0.0 -z 0.05" />
+
+    <node pkg="ros_gz_bridge" exec="parameter_bridge">
+        <param name="config_file" value="$(var bridge_config)" />
+    </node>
+
+
+    <!-- Spawning robot in gazebo -->
+
+
+    <node pkg="rviz2" exec="rviz2" output="screen"  />
+
+    <node pkg="line_controller" exec="line_detection" output="screen" >
+        <param name="start" value="False" />
+    </node>
+
+    <node pkg="line_controller" exec="line_guide" output="screen" />
+
+    
+</launch>
